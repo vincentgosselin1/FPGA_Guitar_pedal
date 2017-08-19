@@ -1,0 +1,40 @@
+/*
+ * main.c
+ *
+ *  Created on: 2017-06-30
+ *      Author: AK82770
+ */
+
+
+/* C Library */
+#include <stdio.h>		// printf()
+#include <string.h> 	// sprintf()
+
+#include "io.h"
+#include "alt_types.h"
+#include "system.h"
+
+//Custom .h files
+#include "sseg_driver.h"
+
+//for audio
+#include "audio_driver.h"
+
+int main(void)
+{
+	//Configure audio chip. By default, Line IN is connected to Line OUT by the BYPASS scheme.
+	audio_init();
+
+	while(1)
+	{
+		//printf("hello\r\n");
+		//audio_no_effect();
+		//audio_distortion();
+		audio_delay();
+	}
+	return 0;
+}
+
+
+
+

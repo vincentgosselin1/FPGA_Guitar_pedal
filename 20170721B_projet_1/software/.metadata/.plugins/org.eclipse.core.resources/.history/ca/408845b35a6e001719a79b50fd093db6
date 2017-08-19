@@ -1,0 +1,89 @@
+/*
+ * main.c
+ *
+ *  Created on: 2017-06-30
+ *      Author: AK82770
+ */
+
+
+/* C Library */
+#include <stdio.h>		// printf()
+#include <string.h> 	// sprintf()
+
+#include "io.h"
+#include "alt_types.h"
+#include "system.h"
+
+//for 7-segments
+#include "sseg_driver.h"
+
+//for buttons
+#include "button_reader.h"
+#define BUTTONS_BASE 0x101020
+
+//for audio
+#include "audio_driver.h"
+
+//State selection
+int state_select(void);
+
+int main(void)
+{
+
+	//FALLING Edge selected in Qsys.
+	clear_all_edge_capture;
+
+	//Configure audio chip. By default, Line IN is connected to Line OUT by the BYPASS scheme.
+	audio_init();
+
+	//There are 4 different state : 0 -> no-effect, 1 -> distortion, 2 -> delay, 3 -> octave
+	//default is no effect
+	int state = 0;
+
+	while(1)
+	{
+
+		int temp = edge_capture;
+		printf("button edge capture value is %04x\r\n",temp);
+		display_int_to_sseg(state); //0 for no-effect
+		state = state_select();
+		switch (state){
+		case 0 :
+			//audio_no_effect();
+			//display_int_to_sseg(0); //0 for no-effect
+			break;
+
+		case 1 :
+			//audio_distortion();
+			//display_int_to_sseg(1); //1 for distortion
+			break;
+
+		case 2 :
+			//audio_delay();
+			//display_int_to_sseg(2); //2 for delay
+			break;
+
+		case 3 :
+			//audio_octave();
+			//display_int_to_sseg(3); //3 for octave
+			break;
+
+		}
+		//audio_no_effect();
+		//audio_distortion();
+		//audio_delay();
+		//audio_octave();
+	}
+	return 0;
+}
+
+int state_select(void){
+	if(edge_capture & key1_pressed)
+	{
+
+	}
+}
+
+
+
+

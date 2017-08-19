@@ -1,0 +1,30 @@
+/*
+ * button_reader.h
+ *
+ *  Created on: 2017-05-25
+ *      Author: ak82770
+ */
+
+#ifndef BUTTON_READER_H_
+#define BUTTON_READER_H_
+
+#define buttons_register IORD(BUTTONS_BASE,0) //sur 4 bits.
+#define key0 0xe
+#define key1 0xd
+
+
+#define edge_capture IORD(BUTTONS_BASE,3) //sur 4 bits.
+#define key0_pressed 0x1
+#define key1_pressed 0x2
+#define key2_pressed 0x4
+#define key3_pressed 0x8
+
+#define clear_all_edge_capture IOWR(BUTTONS_BASE,3, 0xf)
+#define clear_key0 IOWR(BUTTONS_BASE,3, 0x1)
+#define clear_key1 IOWR(BUTTONS_BASE,3, 0x2)
+#define clear_key2 IOWR(BUTTONS_BASE,3, 0x4)
+#define clear_key3 IOWR(BUTTONS_BASE,3, 0x8)
+
+//if(buttons_register==key1)//key0 pressed becomes LOW.
+
+#endif /* BUTTON_READER_H_ */

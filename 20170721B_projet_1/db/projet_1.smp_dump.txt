@@ -1,0 +1,28 @@
+
+State Machine - |projet_1|system:nios_system|system_nios2_gen2_0:nios2_gen2_0|system_nios2_gen2_0_cpu:cpu|system_nios2_gen2_0_cpu_nios2_oci:the_system_nios2_gen2_0_cpu_nios2_oci|system_nios2_gen2_0_cpu_debug_slave_wrapper:the_system_nios2_gen2_0_cpu_debug_slave_wrapper|system_nios2_gen2_0_cpu_debug_slave_tck:the_system_nios2_gen2_0_cpu_debug_slave_tck|DRsize
+Name DRsize.101 DRsize.100 DRsize.011 DRsize.010 DRsize.001 DRsize.000 
+DRsize.000 0 0 0 0 0 0 
+DRsize.001 0 0 0 0 1 1 
+DRsize.010 0 0 0 1 0 1 
+DRsize.011 0 0 1 0 0 1 
+DRsize.100 0 1 0 0 0 1 
+DRsize.101 1 0 0 0 0 1 
+
+State Machine - |projet_1|system:nios_system|system_audio_config:audio_config|s_serial_transfer
+Name s_serial_transfer.STATE_6_POST_READ s_serial_transfer.STATE_5_READ_TRANSFER s_serial_transfer.STATE_4_PRE_READ s_serial_transfer.STATE_3_POST_WRITE s_serial_transfer.STATE_2_WRITE_TRANSFER s_serial_transfer.STATE_1_PRE_WRITE s_serial_transfer.STATE_0_IDLE 
+s_serial_transfer.STATE_0_IDLE 0 0 0 0 0 0 0 
+s_serial_transfer.STATE_1_PRE_WRITE 0 0 0 0 0 1 1 
+s_serial_transfer.STATE_2_WRITE_TRANSFER 0 0 0 0 1 0 1 
+s_serial_transfer.STATE_3_POST_WRITE 0 0 0 1 0 0 1 
+s_serial_transfer.STATE_4_PRE_READ 0 0 1 0 0 0 1 
+s_serial_transfer.STATE_5_READ_TRANSFER 0 1 0 0 0 0 1 
+s_serial_transfer.STATE_6_POST_READ 1 0 0 0 0 0 1 
+
+State Machine - |projet_1|system:nios_system|system_audio_config:audio_config|altera_up_av_config_serial_bus_controller:Serial_Bus_Controller|s_serial_protocol
+Name s_serial_protocol.STATE_5_STOP_BIT s_serial_protocol.STATE_4_TRANSFER s_serial_protocol.STATE_3_START_BIT s_serial_protocol.STATE_2_RESTART_BIT s_serial_protocol.STATE_1_INITIALIZE s_serial_protocol.STATE_0_IDLE 
+s_serial_protocol.STATE_0_IDLE 0 0 0 0 0 0 
+s_serial_protocol.STATE_1_INITIALIZE 0 0 0 0 1 1 
+s_serial_protocol.STATE_2_RESTART_BIT 0 0 0 1 0 1 
+s_serial_protocol.STATE_3_START_BIT 0 0 1 0 0 1 
+s_serial_protocol.STATE_4_TRANSFER 0 1 0 0 0 1 
+s_serial_protocol.STATE_5_STOP_BIT 1 0 0 0 0 1 

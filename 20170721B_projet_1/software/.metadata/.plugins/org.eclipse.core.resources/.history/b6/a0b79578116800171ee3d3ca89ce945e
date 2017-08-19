@@ -1,0 +1,208 @@
+/*
+ * audio_driver.h
+ *
+ *  Created on: 2017-06-29
+ *      Author: ak82770
+ */
+
+#ifndef AUDIO_DRIVER_H_
+#define AUDIO_DRIVER_H_
+
+//audio config
+#include "altera_up_avalon_audio_and_video_config.h"
+
+//audio codec
+#include "altera_up_avalon_audio.h"
+
+//audio config device
+alt_up_av_config_dev *av_config_dev;
+//audio codec device
+alt_up_audio_dev * audio_dev;
+
+//Each Fifo of the audio codec can store up to 128 words of 32-bits wide.
+//So, our Audio buffer will be able to store 128 words.
+#define AUDIO_BUFFER_LEN 2
+
+/* used for audio record/playback */
+//unsigned int l_buf[AUDIO_BUFFER_LEN];
+//unsigned int r_buf[AUDIO_BUFFER_LEN];
+unsigned int l_buf;
+unsigned int r_buf;
+
+
+//Audio init, connects
+void audio_init(void){
+
+	//open the Audio codec device
+	audio_dev = alt_up_audio_open_dev (AUDIO_CODEC_NAME);
+	if ( audio_dev == NULL){
+	printf("Error: could not open audio codec device \n");
+	} else {
+	printf("Opened audio codec device \n");
+	}
+
+	// open the Audio config device
+	av_config_dev = alt_up_av_config_open_dev(AUDIO_CONFIG_NAME);
+	if ( av_config_dev == NULL){
+	printf("Error: could not open audio config device \n\r");
+	} else {
+	printf("Opened audio config device \n\r");
+	}
+
+	//Reset Audio Codec chip (WM8731) to empty Fifos + hardware init config.
+	alt_up_audio_reset_audio_core(audio_dev);
+	alt_up_av_config_reset(av_config_dev);
+
+	//Audio Chip ready for I2C transfer?
+	av_config_dev = alt_up_av_config_open_dev(AUDIO_CONFIG_NAME);
+	if(alt_up_av_config_read_ready(av_config_dev)){
+		printf("Audio chip ready for new I2c transfer \n\r");
+	}
+
+	//Writing a new config for the Audio chip.
+	//Enable BYPASS, should received audio now. Audio Path control Register = 0x04, Data to send = 0x0A
+	//alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x04, 0x0A);
+
+	//Enabling Left Line Input
+	//0db, Disable mute.
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x00, 0x17);
+
+	//NO right channel since my cheap audio cable has only left channel working...
+	//Enabling Right Line Input
+	//0db, Disable mute.
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x01, 0x80);
+
+	//Left Headphone Out.
+	//0db, with Zero Crossing Enable
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x2, 0xF9);
+	//Right Headphone Out.
+	//0db, with Zero Crossing Enable
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x3, 0xF9);
+
+	//Analogue Audio Path Control
+	//Select DAC, Disable Bypass to be output to RHPout/LHPout.
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x04, 0x12);
+
+	//Digital Audio Path Control
+	//Disable DAC Soft Mute Control
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x5, 0x06);
+
+	//Power Down Control
+	//everything ON except MICPD, OSCPD, CLKOUTPD. Not using MIC input.
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x6, 0x02);
+
+	//The rest of control registers are initialized by Hardware.
+}
+
+//No effect, this simply reads value from ADC and outputs them to DAC.
+// NOTE : with my cheap audio cable, only the LEFT input works.
+void audio_no_effect(void){
+
+	//Does not seem to work
+	/*//read the data from the left buffer
+	int nb_left_samples_to_write;
+	nb_left_samples_to_write = alt_up_audio_read_fifo(audio_dev, l_buf, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_LEFT);
+
+	int i;
+	//shift values to a proper base value
+	for (i = 0; i < nb_left_samples_to_write; i++)
+	{
+		if(l_buf[i]>40000){
+				l_buf[i] -= 0x7fff;
+			} else {
+				l_buf[i] += 0x7fff;
+			}
+		//l_buf[i] = l_buf[i] + 0x7fff;
+	}
+
+	//write data to the L and R buffers; R buffer will receive a copy of L buffer data
+	alt_up_audio_write_fifo (audio_dev, l_buf, nb_left_samples_to_write, ALT_UP_AUDIO_RIGHT);
+	alt_up_audio_write_fifo (audio_dev, l_buf, nb_left_samples_to_write, ALT_UP_AUDIO_LEFT);*/
+
+
+
+	//Best results so far
+	// read audio buffer
+	//int number_of_words = alt_up_audio_read_fifo (audio_dev, &(l_buf), 1, ALT_UP_AUDIO_LEFT);
+
+	alt_up_audio_read_fifo (audio_dev, &r_buf, 1, ALT_UP_AUDIO_RIGHT);
+	int number_of_words = alt_up_audio_read_fifo (audio_dev, &l_buf, 1, ALT_UP_AUDIO_LEFT);
+
+	//printf("%d\n\r",number_of_words);
+	/*int i;
+	for (i = 0; i < AUDIO_BUFFER_LEN; i++)
+		{
+			if(l_buf[i]>40000){
+					l_buf[i] -= 0xc000;
+				} else {
+					l_buf[i] += 0x3fff;
+				}
+			//l_buf[i] = l_buf[i] + 0x7fff;
+		}*/
+
+	//printf("%d\r\n",number_of_words);
+	//Since the offset of ADC is 0, we need to put an extra offset for the DAC
+	//Value will be 65536/2 (half the range of 16bits).
+	//printf("%d\r\n",l_buf);
+
+	/*//AROUND 32767,
+	if(l_buf>40000){
+		l_buf = l_buf - 0x7fff;
+	} else {
+		l_buf = l_buf + 0x7fff;
+	}*/
+
+	//Around 16383, maybe better
+	if(l_buf>40000){
+			l_buf = l_buf - 0xc000 ;
+		} else {
+			l_buf = l_buf + 0x3fff ;
+		}
+
+	/*//Around 8191, hearing some POPS at high volume.
+		if(l_buf>40000){
+				l_buf = l_buf - 0xe000 ;
+			} else {
+				l_buf = l_buf + 0x1fff ;
+			}*/
+
+	//l_buf = l_buf + 0x7fff;
+	//printf("%d ",l_buf);
+
+	// write audio buffer
+	//alt_up_audio_write_fifo (audio_dev, 0x0000, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_RIGHT);
+	alt_up_audio_write_fifo (audio_dev, &l_buf, 1, ALT_UP_AUDIO_LEFT);
+	alt_up_audio_write_fifo (audio_dev, &l_buf, 1, ALT_UP_AUDIO_RIGHT);
+
+	//alt_up_audio_write_fifo (audio_dev, 0, 1, ALT_UP_AUDIO_RIGHT);
+	//alt_up_audio_write_fifo (audio_dev, 0, 1, ALT_UP_AUDIO_LEFT);
+
+	/*int fifospace = alt_up_audio_read_fifo_avail (audio_dev, ALT_UP_AUDIO_RIGHT);
+	if ( fifospace > 0 ) // check if data is available
+	{
+	// read audio buffer
+	//alt_up_audio_read_fifo (audio_dev, &(r_buf), 1, ALT_UP_AUDIO_RIGHT);
+	int number_of_words = alt_up_audio_read_fifo (audio_dev, &(l_buf), 1, ALT_UP_AUDIO_LEFT);
+	printf("%d\n\r", number_of_words);
+
+	if(l_buf>40000){
+				l_buf = l_buf - 0xc000 ;
+			} else {
+				l_buf = l_buf + 0x3fff ;
+			}
+
+	// write audio buffer
+	alt_up_audio_write_fifo (audio_dev, &(l_buf), 1, ALT_UP_AUDIO_RIGHT);
+	alt_up_audio_write_fifo (audio_dev, &(l_buf), 1, ALT_UP_AUDIO_LEFT);
+	}*/
+	alt_up_audio_write_fifo (audio_dev, 0, 1, ALT_UP_AUDIO_RIGHT);
+	alt_up_audio_write_fifo (audio_dev, 0, 1, ALT_UP_AUDIO_LEFT);
+
+
+
+}
+
+
+
+
+#endif /* AUDIO_DRIVER_H_ */

@@ -1,0 +1,155 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate C:\Users\ak82770\Documents\ele748\projet_1\system.qsys --block-symbol-file --output-directory=C:\Users\ak82770\Documents\ele748\projet_1\system --family="Cyclone V" --part=5CSEMA5F31C6
+Progress: Loading projet_1/system.qsys
+Progress: Reading input file
+Progress: Adding audio_codec [altera_up_avalon_audio 15.1]
+Progress: Parameterizing module audio_codec
+Progress: Adding audio_config [altera_up_avalon_audio_and_video_config 15.1]
+Progress: Parameterizing module audio_config
+Progress: Adding audio_pll_0 [altera_up_avalon_audio_pll 15.1]
+Progress: Parameterizing module audio_pll_0
+Progress: Adding buttons [altera_avalon_pio 15.1]
+Progress: Parameterizing module buttons
+Progress: Adding clk_0 [clock_source 15.1]
+Progress: Parameterizing module clk_0
+Progress: Adding clock_bridge_0 [altera_clock_bridge 15.1]
+Progress: Parameterizing module clock_bridge_0
+Progress: Adding jtag_uart_0 [altera_avalon_jtag_uart 15.1]
+Progress: Parameterizing module jtag_uart_0
+Progress: Adding nios2_gen2_0 [altera_nios2_gen2 15.1]
+Progress: Parameterizing module nios2_gen2_0
+Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 15.1]
+Progress: Parameterizing module onchip_memory2_0
+Progress: Adding sseg_i_iv [altera_avalon_pio 15.1]
+Progress: Parameterizing module sseg_i_iv
+Progress: Adding sseg_v_vi [altera_avalon_pio 15.1]
+Progress: Parameterizing module sseg_v_vi
+Progress: Adding sysid_qsys_0 [altera_avalon_sysid_qsys 15.1]
+Progress: Parameterizing module sysid_qsys_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: system.buttons: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: system.sysid_qsys_0: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+Info: system.sysid_qsys_0: Time stamp will be automatically updated when this component is generated.
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate C:\Users\ak82770\Documents\ele748\projet_1\system.qsys --synthesis=VHDL --output-directory=C:\Users\ak82770\Documents\ele748\projet_1\system\synthesis --family="Cyclone V" --part=5CSEMA5F31C6
+Progress: Loading projet_1/system.qsys
+Progress: Reading input file
+Progress: Adding audio_codec [altera_up_avalon_audio 15.1]
+Progress: Parameterizing module audio_codec
+Progress: Adding audio_config [altera_up_avalon_audio_and_video_config 15.1]
+Progress: Parameterizing module audio_config
+Progress: Adding audio_pll_0 [altera_up_avalon_audio_pll 15.1]
+Progress: Parameterizing module audio_pll_0
+Progress: Adding buttons [altera_avalon_pio 15.1]
+Progress: Parameterizing module buttons
+Progress: Adding clk_0 [clock_source 15.1]
+Progress: Parameterizing module clk_0
+Progress: Adding clock_bridge_0 [altera_clock_bridge 15.1]
+Progress: Parameterizing module clock_bridge_0
+Progress: Adding jtag_uart_0 [altera_avalon_jtag_uart 15.1]
+Progress: Parameterizing module jtag_uart_0
+Progress: Adding nios2_gen2_0 [altera_nios2_gen2 15.1]
+Progress: Parameterizing module nios2_gen2_0
+Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 15.1]
+Progress: Parameterizing module onchip_memory2_0
+Progress: Adding sseg_i_iv [altera_avalon_pio 15.1]
+Progress: Parameterizing module sseg_i_iv
+Progress: Adding sseg_v_vi [altera_avalon_pio 15.1]
+Progress: Parameterizing module sseg_v_vi
+Progress: Adding sysid_qsys_0 [altera_avalon_sysid_qsys 15.1]
+Progress: Parameterizing module sysid_qsys_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: system.buttons: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: system.sysid_qsys_0: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+Info: system.sysid_qsys_0: Time stamp will be automatically updated when this component is generated.
+Info: system: Generating system "system" for QUARTUS_SYNTH
+Info: Inserting clock-crossing logic between cmd_demux.src0 and cmd_mux.sink0
+Info: Inserting clock-crossing logic between rsp_demux.src0 and rsp_mux.sink0
+Info: audio_codec: Starting Generation of Audio Controller
+Info: audio_codec: "system" instantiated altera_up_avalon_audio "audio_codec"
+Info: audio_config: Starting Generation of Audio and Video Config
+Info: audio_config: "system" instantiated altera_up_avalon_audio_and_video_config "audio_config"
+Info: audio_pll_0: "system" instantiated altera_up_avalon_audio_pll "audio_pll_0"
+Info: buttons: Starting RTL generation for module 'system_buttons'
+Info: buttons:   Generation command is [exec C:/altera_lite/15.1/quartus/bin64/perl/bin/perl.exe -I C:/altera_lite/15.1/quartus/bin64/perl/lib -I C:/altera_lite/15.1/quartus/sopc_builder/bin/europa -I C:/altera_lite/15.1/quartus/sopc_builder/bin/perl_lib -I C:/altera_lite/15.1/quartus/sopc_builder/bin -I C:/altera_lite/15.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/altera_lite/15.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/altera_lite/15.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=system_buttons --dir=C:/TEMP/alt7368_4727315458460278152.dir/0003_buttons_gen/ --quartus_dir=C:/altera_lite/15.1/quartus --verilog --config=C:/TEMP/alt7368_4727315458460278152.dir/0003_buttons_gen//system_buttons_component_configuration.pl  --do_build_sim=0  ]
+Info: buttons: Done RTL generation for module 'system_buttons'
+Info: buttons: "system" instantiated altera_avalon_pio "buttons"
+Info: jtag_uart_0: Starting RTL generation for module 'system_jtag_uart_0'
+Info: jtag_uart_0:   Generation command is [exec C:/altera_lite/15.1/quartus/bin64/perl/bin/perl.exe -I C:/altera_lite/15.1/quartus/bin64/perl/lib -I C:/altera_lite/15.1/quartus/sopc_builder/bin/europa -I C:/altera_lite/15.1/quartus/sopc_builder/bin/perl_lib -I C:/altera_lite/15.1/quartus/sopc_builder/bin -I C:/altera_lite/15.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/altera_lite/15.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- C:/altera_lite/15.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=system_jtag_uart_0 --dir=C:/TEMP/alt7368_4727315458460278152.dir/0004_jtag_uart_0_gen/ --quartus_dir=C:/altera_lite/15.1/quartus --verilog --config=C:/TEMP/alt7368_4727315458460278152.dir/0004_jtag_uart_0_gen//system_jtag_uart_0_component_configuration.pl  --do_build_sim=0  ]
+Info: jtag_uart_0: Done RTL generation for module 'system_jtag_uart_0'
+Info: jtag_uart_0: "system" instantiated altera_avalon_jtag_uart "jtag_uart_0"
+Info: nios2_gen2_0: "system" instantiated altera_nios2_gen2 "nios2_gen2_0"
+Info: onchip_memory2_0: Starting RTL generation for module 'system_onchip_memory2_0'
+Info: onchip_memory2_0:   Generation command is [exec C:/altera_lite/15.1/quartus/bin64/perl/bin/perl.exe -I C:/altera_lite/15.1/quartus/bin64/perl/lib -I C:/altera_lite/15.1/quartus/sopc_builder/bin/europa -I C:/altera_lite/15.1/quartus/sopc_builder/bin/perl_lib -I C:/altera_lite/15.1/quartus/sopc_builder/bin -I C:/altera_lite/15.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/altera_lite/15.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- C:/altera_lite/15.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=system_onchip_memory2_0 --dir=C:/TEMP/alt7368_4727315458460278152.dir/0005_onchip_memory2_0_gen/ --quartus_dir=C:/altera_lite/15.1/quartus --verilog --config=C:/TEMP/alt7368_4727315458460278152.dir/0005_onchip_memory2_0_gen//system_onchip_memory2_0_component_configuration.pl  --do_build_sim=0  ]
+Info: onchip_memory2_0: Done RTL generation for module 'system_onchip_memory2_0'
+Info: onchip_memory2_0: "system" instantiated altera_avalon_onchip_memory2 "onchip_memory2_0"
+Info: sseg_i_iv: Starting RTL generation for module 'system_sseg_i_iv'
+Info: sseg_i_iv:   Generation command is [exec C:/altera_lite/15.1/quartus/bin64/perl/bin/perl.exe -I C:/altera_lite/15.1/quartus/bin64/perl/lib -I C:/altera_lite/15.1/quartus/sopc_builder/bin/europa -I C:/altera_lite/15.1/quartus/sopc_builder/bin/perl_lib -I C:/altera_lite/15.1/quartus/sopc_builder/bin -I C:/altera_lite/15.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/altera_lite/15.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/altera_lite/15.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=system_sseg_i_iv --dir=C:/TEMP/alt7368_4727315458460278152.dir/0006_sseg_i_iv_gen/ --quartus_dir=C:/altera_lite/15.1/quartus --verilog --config=C:/TEMP/alt7368_4727315458460278152.dir/0006_sseg_i_iv_gen//system_sseg_i_iv_component_configuration.pl  --do_build_sim=0  ]
+Info: sseg_i_iv: Done RTL generation for module 'system_sseg_i_iv'
+Info: sseg_i_iv: "system" instantiated altera_avalon_pio "sseg_i_iv"
+Info: sysid_qsys_0: "system" instantiated altera_avalon_sysid_qsys "sysid_qsys_0"
+Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_001: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_002: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_003: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_004: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_005: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_006: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_007: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_008: Inserting error_adapter: error_adapter_0
+Info: mm_interconnect_0: "system" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: irq_mapper: "system" instantiated altera_irq_mapper "irq_mapper"
+Info: irq_synchronizer: "system" instantiated altera_irq_clock_crosser "irq_synchronizer"
+Info: rst_controller: "system" instantiated altera_reset_controller "rst_controller"
+Info: audio_pll: "audio_pll_0" instantiated altera_pll "audio_pll"
+Info: reset_from_locked: "audio_pll_0" instantiated altera_up_avalon_reset_from_locked_signal "reset_from_locked"
+Info: cpu: Starting RTL generation for module 'system_nios2_gen2_0_cpu'
+Info: cpu:   Generation command is [exec C:/altera_lite/15.1/quartus/bin64//eperlcmd.exe -I C:/altera_lite/15.1/quartus/bin64//perl/lib -I C:/altera_lite/15.1/quartus/sopc_builder/bin/europa -I C:/altera_lite/15.1/quartus/sopc_builder/bin/perl_lib -I C:/altera_lite/15.1/quartus/sopc_builder/bin -I C:/altera_lite/15.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I C:/altera_lite/15.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I C:/altera_lite/15.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I C:/altera_lite/15.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- C:/altera_lite/15.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.epl --name=system_nios2_gen2_0_cpu --dir=C:/TEMP/alt7368_4727315458460278152.dir/0013_cpu_gen/ --quartus_bindir=C:/altera_lite/15.1/quartus/bin64/ --verilog --config=C:/TEMP/alt7368_4727315458460278152.dir/0013_cpu_gen//system_nios2_gen2_0_cpu_processor_configuration.pl  --do_build_sim=0  ]
+Info: cpu: # 2017.07.21 17:41:45 (*) Starting Nios II generation
+Info: cpu: # 2017.07.21 17:41:45 (*)   Checking for plaintext license.
+Info: cpu: # 2017.07.21 17:41:48 (*)   Couldn't query license setup in Quartus directory C:/altera_lite/15.1/quartus/bin64/
+Info: cpu: # 2017.07.21 17:41:48 (*)   Defaulting to contents of LM_LICENSE_FILE environment variable
+Info: cpu: # 2017.07.21 17:41:58 (*)   Plaintext license not found.
+Info: cpu: # 2017.07.21 17:41:58 (*)   No license required to generate encrypted Nios II/e.
+Info: cpu: # 2017.07.21 17:41:58 (*)   Elaborating CPU configuration settings
+Info: cpu: # 2017.07.21 17:41:58 (*)   Creating all objects for CPU
+Info: cpu: # 2017.07.21 17:41:59 (*)   Generating RTL from CPU objects
+Info: cpu: # 2017.07.21 17:41:59 (*)   Creating plain-text RTL
+Info: cpu: # 2017.07.21 17:42:01 (*) Done Nios II generation
+Info: cpu: Done RTL generation for module 'system_nios2_gen2_0_cpu'
+Info: cpu: "nios2_gen2_0" instantiated altera_nios2_gen2_unit "cpu"
+Info: nios2_gen2_0_data_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "nios2_gen2_0_data_master_translator"
+Info: audio_codec_avalon_audio_slave_translator: "mm_interconnect_0" instantiated altera_merlin_slave_translator "audio_codec_avalon_audio_slave_translator"
+Info: nios2_gen2_0_data_master_agent: "mm_interconnect_0" instantiated altera_merlin_master_agent "nios2_gen2_0_data_master_agent"
+Info: audio_codec_avalon_audio_slave_agent: "mm_interconnect_0" instantiated altera_merlin_slave_agent "audio_codec_avalon_audio_slave_agent"
+Info: audio_codec_avalon_audio_slave_agent_rsp_fifo: "mm_interconnect_0" instantiated altera_avalon_sc_fifo "audio_codec_avalon_audio_slave_agent_rsp_fifo"
+Info: router: "mm_interconnect_0" instantiated altera_merlin_router "router"
+Info: router_001: "mm_interconnect_0" instantiated altera_merlin_router "router_001"
+Info: router_002: "mm_interconnect_0" instantiated altera_merlin_router "router_002"
+Info: router_006: "mm_interconnect_0" instantiated altera_merlin_router "router_006"
+Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: cmd_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_001"
+Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: cmd_mux_004: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_004"
+Info: Reusing file C:/Users/ak82770/Documents/ele748/projet_1/system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
+Info: rsp_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_001"
+Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: Reusing file C:/Users/ak82770/Documents/ele748/projet_1/system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux_001"
+Info: Reusing file C:/Users/ak82770/Documents/ele748/projet_1/system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: crosser: "mm_interconnect_0" instantiated altera_avalon_st_handshake_clock_crosser "crosser"
+Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
+Info: system: Done "system" with 37 modules, 74 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

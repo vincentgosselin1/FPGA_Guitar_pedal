@@ -1,0 +1,10 @@
+PLL_Name	system:nios_system|system_audio_pll_0:audio_pll_0|system_audio_pll_0_audio_pll:audio_pll|altera_pll:altera_pll_i|general[0].gpll~FRACTIONAL_PLL
+PLLJITTER	26
+PLLSPEmax	100
+PLLSPEmin	-100
+
+PLL_Name	system:nios_system|system_audio_pll_0:audio_pll_0|system_audio_pll_0_audio_pll:audio_pll|altera_pll:altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER
+PLLJITTER	NA
+PLLSPEmax	NA
+PLLSPEmin	NA
+
