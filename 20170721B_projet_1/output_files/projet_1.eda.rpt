@@ -1,6 +1,6 @@
 EDA Netlist Writer report for projet_1
-Fri Jul 21 17:51:06 2017
-Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
+Tue Dec 29 19:27:22 2020
+Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
 ---------------------
@@ -17,27 +17,26 @@ Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2015 Altera Corporation. All rights reserved.
-Your use of Altera Corporation's design tools, logic functions 
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
-to the terms and conditions of the Altera Program License 
-Subscription Agreement, the Altera Quartus Prime License Agreement,
-the Altera MegaCore Function License Agreement, or other 
-applicable license agreement, including, without limitation, 
-that your use is for the sole purpose of programming logic 
-devices manufactured by Altera and sold by Altera or its 
-authorized distributors.  Please refer to the applicable 
-agreement for further details.
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
 
 
 
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Fri Jul 21 17:51:06 2017 ;
+; EDA Netlist Writer Status ; Successful - Tue Dec 29 19:27:22 2020 ;
 ; Revision Name             ; projet_1                              ;
 ; Top-level Entity Name     ; projet_1                              ;
 ; Family                    ; Cyclone V                             ;
@@ -51,7 +50,7 @@ agreement for further details.
 ; Option                                                                                            ; Setting                ;
 +---------------------------------------------------------------------------------------------------+------------------------+
 ; Tool Name                                                                                         ; ModelSim-Altera (VHDL) ;
-; Generate netlist for functional simulation only                                                   ; Off                    ;
+; Generate functional simulation netlist                                                            ; Off                    ;
 ; Time scale                                                                                        ; 1 ps                   ;
 ; Truncate long hierarchy paths                                                                     ; Off                    ;
 ; Map illegal HDL characters                                                                        ; Off                    ;
@@ -67,13 +66,13 @@ agreement for further details.
 +---------------------------------------------------------------------------------------------------+------------------------+
 
 
-+-----------------------------------------------------------------------------+
-; Simulation Generated Files                                                  ;
-+-----------------------------------------------------------------------------+
-; Generated Files                                                             ;
-+-----------------------------------------------------------------------------+
-; C:/Users/ak82770/Documents/ele748/projet_1/simulation/modelsim/projet_1.vho ;
-+-----------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------+
+; Simulation Generated Files                                                                                 ;
++------------------------------------------------------------------------------------------------------------+
+; Generated Files                                                                                            ;
++------------------------------------------------------------------------------------------------------------+
+; C:/intelFPGA_lite/17.1/quartus/MyDev/FPGA_Guitar_pedal/20170721B_projet_1/simulation/modelsim/projet_1.vho ;
++------------------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------+
@@ -81,15 +80,16 @@ agreement for further details.
 +-----------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
-    Info: Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
-    Info: Processing started: Fri Jul 21 17:51:03 2017
+    Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+    Info: Processing started: Tue Dec 29 19:27:17 2020
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off projet_1 -c projet_1
-Warning (10905): Generated the EDA functional simulation files although EDA timing simulation option is chosen.
-Info (204019): Generated file projet_1.vho in folder "C:/Users/ak82770/Documents/ele748/projet_1/simulation/modelsim/" for EDA simulation tool
-Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 960 megabytes
-    Info: Processing ended: Fri Jul 21 17:51:06 2017
-    Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:04
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Warning (10905): Generated the EDA functional simulation netlist because it is the only supported netlist type for this device.
+Info (204019): Generated file projet_1.vho in folder "C:/intelFPGA_lite/17.1/quartus/MyDev/FPGA_Guitar_pedal/20170721B_projet_1/simulation/modelsim/" for EDA simulation tool
+Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 2 warnings
+    Info: Peak virtual memory: 4901 megabytes
+    Info: Processing ended: Tue Dec 29 19:27:22 2020
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:05
 
 

@@ -150,12 +150,12 @@ flash2dat_extra_args = $(mem_pad_flag) $(mem_reloc_input_flag)
 
 # This following VERSION comment indicates the version of the tool used to 
 # generate this makefile. A makefile variable is provided for VERSION as well. 
-# ACDS_VERSION: 15.1
-ACDS_VERSION := 15.1
+# ACDS_VERSION: 17.1
+ACDS_VERSION := 17.1
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 185
+# BUILD_NUMBER: 590
 
 # Optimize for simulation
 SIM_OPTIMIZE ?= 0
@@ -181,8 +181,8 @@ HDL_SIM_INSTALL_FILES += $(HDL_SIM_INSTALL_DIR)/$(MEM_0).dat
 SYM_FILES += $(HDL_SIM_DIR)/$(MEM_0).sym
 HDL_SIM_INSTALL_FILES += $(HDL_SIM_INSTALL_DIR)/$(MEM_0).sym
 $(MEM_0)_START := 0x00080000
-$(MEM_0)_END := 0x000c93df
-$(MEM_0)_SPAN := 0x000493e0
+$(MEM_0)_END := 0x000ebe8f
+$(MEM_0)_SPAN := 0x0006be90
 $(MEM_0)_HIERARCHICAL_PATH := onchip_memory2_0
 $(MEM_0)_WIDTH := 32
 $(MEM_0)_HEX_DATA_WIDTH := 32

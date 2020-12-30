@@ -1,0 +1,342 @@
+/*
+ * audio_driver.h
+ *
+ *  Created on: 2017-06-29
+ *      Author: VINCENT GOSSELIN
+ */
+
+#ifndef AUDIO_DRIVER_H_
+#define AUDIO_DRIVER_H_
+
+//audio config
+#include "altera_up_avalon_audio_and_video_config.h"
+
+//audio codec
+#include "altera_up_avalon_audio.h"
+
+//math for dsp
+//#include "math.h"
+
+//audio config device
+alt_up_av_config_dev *av_config_dev;
+//audio codec device
+alt_up_audio_dev * audio_dev;
+
+//Each Fifo of the audio codec can store up to 128 words of 32-bits wide.
+//So, our Audio buffer will be able to store 64 words.
+//#define AUDIO_BUFFER_LEN 16
+//#define AUDIO_BUFFER_LEN 32
+#define AUDIO_BUFFER_LEN 64 //CANNOT CHANGE ANYMORE.
+//#define AUDIO_BUFFER_LEN 100
+//#define AUDIO_BUFFER_LEN 120 <- does not work.
+
+/* used for audio record/playback */
+unsigned int l_buf[AUDIO_BUFFER_LEN];
+unsigned int r_buf[AUDIO_BUFFER_LEN];
+
+//For 500ms Echo.
+//Sample rate is 32kHz, 31.25usec between each samples
+//Echo will be at 500ms. So we need to store 16000samples.
+//#define DELAY_AUDIO_BUFFER_LEN 16000
+//unsigned int delay_audio_buffer[DELAY_AUDIO_BUFFER_LEN] = {0};
+
+//For 1000ms Echo.
+//Sample rate is 32kHz, 31.25usec between each samples
+//Echo will be at 2000ms. So we need to store 64000samples.
+
+//92500 seems good with 500ms of delay on pc.
+#define DELAY_AUDIO_BUFFER_LEN 92500
+//#define DELAY_AUDIO_BUFFER_LEN 40000
+unsigned int delay_audio_buffer[DELAY_AUDIO_BUFFER_LEN] = {0};
+
+//int delay_audio_buffer_index = 0;
+unsigned int storing_audio_index = 0;
+unsigned int reading_audio_index = 1;
+//unsigned int reading_audio_index = 1;
+unsigned int outgoing_buffer[AUDIO_BUFFER_LEN];
+
+//For Octave, Higher pitch use here.
+#define OCTAVE_AUDIO_BUFFER_LEN AUDIO_BUFFER_LEN //best fit!
+//#define OCTAVE_AUDIO_BUFFER_LEN 1024
+unsigned int octave_buffer1 [ OCTAVE_AUDIO_BUFFER_LEN] = {0};
+unsigned int octave_buffer2 [ OCTAVE_AUDIO_BUFFER_LEN] = {0};
+unsigned int octave_reading_index1 = 0;
+unsigned int octave_reading_index2 = ( OCTAVE_AUDIO_BUFFER_LEN/2)-1;//halfway through
+unsigned int octave_storing_index = 0;
+unsigned int octave_outputbuffer[AUDIO_BUFFER_LEN] = {0};
+
+
+
+
+//Audio init, connects
+void audio_init(void){
+
+	//open the Audio codec device
+	audio_dev = alt_up_audio_open_dev (AUDIO_CODEC_NAME);
+	if ( audio_dev == NULL){
+	//printf("Error: could not open audio codec device \n");
+	} else {
+	//printf("Opened audio codec device \n");
+	}
+
+	// open the Audio config device
+	av_config_dev = alt_up_av_config_open_dev(AUDIO_CONFIG_NAME);
+	if ( av_config_dev == NULL){
+	//printf("Error: could not open audio config device \n\r");
+	} else {
+	//printf("Opened audio config device \n\r");
+	}
+
+	//Reset Audio Codec chip (WM8731) to empty Fifos + hardware init config.
+	alt_up_audio_reset_audio_core(audio_dev);
+	alt_up_av_config_reset(av_config_dev);
+
+	//int i,j = 0;
+	//for (i = 0; i < 100; i++) {
+		//printf("i = %d\n\r", i);
+	//}
+
+	//Audio Chip ready for I2C transfer?
+	av_config_dev = alt_up_av_config_open_dev(AUDIO_CONFIG_NAME);
+	if(alt_up_av_config_read_ready(av_config_dev)){
+		//printf("Audio chip ready for new I2c transfer \n\r");
+	} else {
+		//printf("Audio chip NOT ready for new I2c transfer \n\r");
+	}
+
+	//Writing a new config for the Audio chip.
+	//Enable BYPASS, should received audio now. Audio Path control Register = 0x04, Data to send = 0x0A
+	//alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x04, 0x0A);
+
+	//Enabling Left Line Input
+	//0db, Disable mute.
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x00, 0x17);
+
+	//NO right channel since my cheap audio cable has only left channel working...
+	//Enabling Right Line Input
+	//0db, Disable mute.
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x01, 0x17);
+	//alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x01, 0x80);
+
+	//Left Headphone Out.
+	//0db, with Zero Crossing Enable
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x2, 0xF9);
+	//Right Headphone Out.
+	//0db, with Zero Crossing Enable
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x3, 0xF9);
+
+	//Analogue Audio Path Control
+	//Select DAC, Disable Bypass to be output to RHPout/LHPout.
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x04, 0x12);
+
+	//Digital Audio Path Control
+	//Disable DAC Soft Mute Control
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x5, 0x06);
+
+	//Power Down Control
+	//everything ON except MICPD, OSCPD, CLKOUTPD. Not using MIC input.
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x6, 0x02);
+
+	//The rest of control registers are initialized by Hardware.
+
+	//Select DAC, Disable Bypass to be output to RHPout/LHPout.
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x04, 0x12);
+}
+
+//No effect, this simply reads value from ADC and outputs them to DAC.
+// NOTE : with my cheap audio cable, only the LEFT input works.
+void audio_no_effect(void){
+
+	//Select DAC, Disable Bypass to be output to RHPout/LHPout.
+	//alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x04, 0x12);
+
+	//EVEN BETTER, best one.
+
+	int fifospace = alt_up_audio_read_fifo_avail (audio_dev, ALT_UP_AUDIO_LEFT);
+	if(fifospace>AUDIO_BUFFER_LEN){
+
+		alt_up_audio_read_fifo (audio_dev, r_buf, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_RIGHT);
+		alt_up_audio_read_fifo (audio_dev, l_buf, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_LEFT);
+
+		//AROUND 32767,
+		int i;
+		for(i=0;i<AUDIO_BUFFER_LEN;i++){
+			if(l_buf[i]>40000){
+				l_buf[i] = l_buf[i] - 0x7fff;
+			} else {
+				l_buf[i] = l_buf[i] + 0x7fff;
+			}
+		}
+
+		alt_up_audio_write_fifo (audio_dev, l_buf, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_RIGHT);
+		alt_up_audio_write_fifo (audio_dev, l_buf, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_LEFT);
+	}
+
+}
+
+void audio_distortion(void){
+	//Not the expected distortion algorithm but it works.
+	//This one works with frequency cancellations and bouncing I think.
+
+	//Old working code but it works. This is the distortion.
+	//WORKING CODE
+
+	unsigned int distortion_l_buf;
+	unsigned int distortion_r_buf;
+
+	// read audio buffer
+	alt_up_audio_read_fifo (audio_dev, &(distortion_r_buf), 1, ALT_UP_AUDIO_RIGHT);
+	alt_up_audio_read_fifo (audio_dev, &(distortion_l_buf), 1, ALT_UP_AUDIO_LEFT);
+
+	if(distortion_l_buf>40000){
+		distortion_l_buf = distortion_l_buf - 0x7fff ;
+
+			} else {
+				distortion_l_buf = distortion_l_buf + 0x7fff ;
+
+			}
+
+	//Write audio buffer
+	alt_up_audio_write_fifo (audio_dev, &(distortion_l_buf), 1, ALT_UP_AUDIO_RIGHT);
+	alt_up_audio_write_fifo (audio_dev, &(distortion_l_buf), 1, ALT_UP_AUDIO_LEFT);
+	alt_up_audio_write_fifo (audio_dev, &(distortion_l_buf), 1, ALT_UP_AUDIO_RIGHT);
+	alt_up_audio_write_fifo (audio_dev, &(distortion_l_buf), 1, ALT_UP_AUDIO_LEFT);
+	alt_up_audio_write_fifo (audio_dev, &(distortion_l_buf), 1, ALT_UP_AUDIO_RIGHT);
+	alt_up_audio_write_fifo (audio_dev, &(distortion_l_buf), 1, ALT_UP_AUDIO_LEFT);
+	alt_up_audio_write_fifo (audio_dev, &(distortion_l_buf), 1, ALT_UP_AUDIO_RIGHT);
+	alt_up_audio_write_fifo (audio_dev, &(distortion_l_buf), 1, ALT_UP_AUDIO_LEFT);
+}
+
+void audio_delay(void){
+	//Sample rate is 32kHz, 31.25usec between each samples
+
+	//echo will be at 500ms. So we need to store 16000samples.
+
+	//Active bypass + dac in audio path
+	//alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x04, 0x1A);
+
+	//Acquiring/Writing to Audio Chip
+	int input_fifo = alt_up_audio_read_fifo_avail(audio_dev, ALT_UP_AUDIO_LEFT);
+	//For synchronizing writing/reading from audio chip.
+	if(input_fifo>AUDIO_BUFFER_LEN){
+
+		//Circular buffer of 16000
+		//storing index
+			//storing_audio_index = storing_audio_index % (DELAY_AUDIO_BUFFER_LEN);
+		//reading index
+		//reading_audio_index = reading_audio_index % (DELAY_AUDIO_BUFFER_LEN-64);//SOLVE THE TOCTOC
+		//reading_audio_index = reading_audio_index % (DELAY_AUDIO_BUFFER_LEN+64);//SOLVE THE TOCTOC
+			//reading_audio_index = reading_audio_index % (DELAY_AUDIO_BUFFER_LEN);//SOLVE THE TOCTOC
+
+
+//
+//		//circular buffer fixed.
+		//if(storing_audio_index >= DELAY_AUDIO_BUFFER_LEN){
+		//	storing_audio_index = 0;
+		//}
+		//if(reading_audio_index >= DELAY_AUDIO_BUFFER_LEN) {
+		//	reading_audio_index = 1;
+		//}
+
+
+		//storing_audio_index = storing_audio_index % (DELAY_AUDIO_BUFFER_LEN);
+		//reading_audio_index = reading_audio_index % (DELAY_AUDIO_BUFFER_LEN);//SOLVE THE TOCTOC
+
+		//Reading input fifo.
+		alt_up_audio_read_fifo (audio_dev, r_buf, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_RIGHT);
+		alt_up_audio_read_fifo (audio_dev, l_buf, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_LEFT);
+		//printf("words_read = %d\n\r",words_read);
+
+		//for 100 samples.
+		int i;
+		for(i=0;i<AUDIO_BUFFER_LEN;i++){
+
+			//ADJUSTING TO AROUND 32767,
+			if(l_buf[i]>40000){
+				l_buf[i] = l_buf[i] - 0x7fff;
+			} else {
+				l_buf[i] = l_buf[i] + 0x7fff;
+			}
+
+			//storing in delay_buffer
+			delay_audio_buffer[storing_audio_index] = l_buf[i];
+			//retrieving from buffer
+			outgoing_buffer[i] = delay_audio_buffer[reading_audio_index];
+
+			//Reading index is always 1 sample ahead of storing index.
+			storing_audio_index = storing_audio_index + 1;
+			reading_audio_index = reading_audio_index + 1;
+
+		}
+		//writing to output fifo
+		alt_up_audio_write_fifo (audio_dev, outgoing_buffer, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_RIGHT);
+		alt_up_audio_write_fifo (audio_dev, outgoing_buffer, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_LEFT);
+	}
+
+}
+
+void audio_octave(void){
+
+	//Not the best but prove of concept is done.
+	//Stragegy : buffer #1 is phase 0, buffer #2 is phase 180. Add both values and average.
+
+	//Not required.
+	//Active bypass + dac in audio path
+	//alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x04, 0x1A);
+
+	//Dual buffer scheme use.
+	int fifospace = alt_up_audio_read_fifo_avail (audio_dev, ALT_UP_AUDIO_LEFT);
+		if(fifospace>AUDIO_BUFFER_LEN){
+
+			//2 circular buffer phased shift by 180degrees.
+			octave_storing_index = octave_storing_index %  OCTAVE_AUDIO_BUFFER_LEN;
+			octave_reading_index1 = octave_reading_index1 %  OCTAVE_AUDIO_BUFFER_LEN;
+			octave_reading_index2 = octave_reading_index2 %  OCTAVE_AUDIO_BUFFER_LEN;
+
+			alt_up_audio_read_fifo (audio_dev, r_buf, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_RIGHT);
+			alt_up_audio_read_fifo (audio_dev, l_buf, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_LEFT);
+
+
+			int i;
+			for(i=0;i<AUDIO_BUFFER_LEN;i++){
+				//AROUND 32767
+				if(l_buf[i]>40000){
+					l_buf[i] = l_buf[i] - 0x7fff;
+				} else {
+					l_buf[i] = l_buf[i] + 0x7fff;
+				}
+
+				//storing in octave_buffer1
+				octave_buffer1[octave_storing_index] = l_buf[i];
+				//storing in octave_buffer2
+				octave_buffer2[octave_storing_index] = l_buf[i];
+				//reading from octave_buffer1 into a temp1 value. Will be further averaged.
+				unsigned int temp1,temp2;
+				temp1 = octave_buffer1[octave_reading_index1];
+				temp2 = octave_buffer2[octave_reading_index2];
+				//Average is taken
+				unsigned int average;
+				average = (temp1+temp2)/2;
+				//Average is put into octave_outputbuffer
+				octave_outputbuffer[i] =  average;
+				//printf("average is %d\n\r", average);
+
+				//Best fit.
+				octave_reading_index1 = octave_reading_index1 + 1;
+				octave_reading_index2 = octave_reading_index2 + 1;
+				octave_storing_index = octave_storing_index + 1;
+
+			}
+			//writing to output fifo
+			alt_up_audio_write_fifo (audio_dev, octave_outputbuffer, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_RIGHT);
+			alt_up_audio_write_fifo (audio_dev, octave_outputbuffer, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_LEFT);
+		}
+
+}
+
+
+
+
+
+
+#endif /* AUDIO_DRIVER_H_ */

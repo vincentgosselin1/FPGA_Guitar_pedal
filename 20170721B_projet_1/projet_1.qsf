@@ -38,11 +38,11 @@
 
 
 set_global_assignment -name FAMILY "Cyclone V"
-set_global_assignment -name DEVICE 5CSEMA5F31C6
+set_global_assignment -name DEVICE 5CGXFC5C6F27C7
 set_global_assignment -name TOP_LEVEL_ENTITY projet_1
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 15.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:49:02  JUNE 22, 2017"
-set_global_assignment -name LAST_QUARTUS_VERSION 15.1.0
+set_global_assignment -name LAST_QUARTUS_VERSION "17.1.0 Lite Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
@@ -58,16 +58,16 @@ set_location_assignment PIN_AJ4 -to ADC_CS_N
 set_location_assignment PIN_AK4 -to ADC_DIN
 set_location_assignment PIN_AK3 -to ADC_DOUT
 set_location_assignment PIN_AK2 -to ADC_SCLK
-set_location_assignment PIN_K7 -to AUD_ADCDAT
-set_location_assignment PIN_K8 -to AUD_ADCLRCK
-set_location_assignment PIN_H7 -to AUD_BCLK
-set_location_assignment PIN_J7 -to AUD_DACDAT
-set_location_assignment PIN_H8 -to AUD_DACLRCK
-set_location_assignment PIN_G7 -to AUD_XCK
-set_location_assignment PIN_AF14 -to CLOCK_50
-set_location_assignment PIN_AA16 -to CLOCK2_50
-set_location_assignment PIN_Y26 -to CLOCK3_50
-set_location_assignment PIN_K14 -to CLOCK4_50
+set_location_assignment PIN_D7 -to AUD_ADCDAT
+set_location_assignment PIN_C7 -to AUD_ADCLRCK
+set_location_assignment PIN_E6 -to AUD_BCLK
+set_location_assignment PIN_H10 -to AUD_DACDAT
+set_location_assignment PIN_G10 -to AUD_DACLRCK
+set_location_assignment PIN_D6 -to AUD_XCK
+set_location_assignment PIN_N20 -to CLOCK_50
+set_location_assignment PIN_R20 -to CLOCK2_50
+#set_location_assignment PIN_N20 -to CLOCK3_50
+set_location_assignment PIN_H12 -to CLOCK4_50
 set_location_assignment PIN_AK14 -to DRAM_ADDR[0]
 set_location_assignment PIN_AH14 -to DRAM_ADDR[1]
 set_location_assignment PIN_AG15 -to DRAM_ADDR[2]
@@ -108,8 +108,8 @@ set_location_assignment PIN_AE13 -to DRAM_RAS_N
 set_location_assignment PIN_AK12 -to DRAM_UDQM
 set_location_assignment PIN_AA13 -to DRAM_WE_N
 set_location_assignment PIN_AA12 -to FAN_CTRL
-set_location_assignment PIN_J12 -to FPGA_I2C_SCLK
-set_location_assignment PIN_K12 -to FPGA_I2C_SDAT
+set_location_assignment PIN_B7 -to FPGA_I2C_SCLK
+set_location_assignment PIN_G11 -to FPGA_I2C_SDAT
 set_location_assignment PIN_AC18 -to GPIO_0[0]
 set_location_assignment PIN_AH18 -to GPIO_0[10]
 set_location_assignment PIN_AH17 -to GPIO_0[11]
@@ -182,52 +182,52 @@ set_location_assignment PIN_AE24 -to GPIO_1[6]
 set_location_assignment PIN_AF25 -to GPIO_1[7]
 set_location_assignment PIN_AF26 -to GPIO_1[8]
 set_location_assignment PIN_AG25 -to GPIO_1[9]
-set_location_assignment PIN_AE26 -to HEX0[0]
-set_location_assignment PIN_AE27 -to HEX0[1]
-set_location_assignment PIN_AE28 -to HEX0[2]
-set_location_assignment PIN_AG27 -to HEX0[3]
-set_location_assignment PIN_AF28 -to HEX0[4]
-set_location_assignment PIN_AG28 -to HEX0[5]
-set_location_assignment PIN_AH28 -to HEX0[6]
-set_location_assignment PIN_AJ29 -to HEX1[0]
-set_location_assignment PIN_AH29 -to HEX1[1]
-set_location_assignment PIN_AH30 -to HEX1[2]
-set_location_assignment PIN_AG30 -to HEX1[3]
-set_location_assignment PIN_AF29 -to HEX1[4]
-set_location_assignment PIN_AF30 -to HEX1[5]
-set_location_assignment PIN_AD27 -to HEX1[6]
-set_location_assignment PIN_AB23 -to HEX2[0]
-set_location_assignment PIN_AE29 -to HEX2[1]
-set_location_assignment PIN_AD29 -to HEX2[2]
-set_location_assignment PIN_AC28 -to HEX2[3]
-set_location_assignment PIN_AD30 -to HEX2[4]
-set_location_assignment PIN_AC29 -to HEX2[5]
-set_location_assignment PIN_AC30 -to HEX2[6]
-set_location_assignment PIN_AD26 -to HEX3[0]
-set_location_assignment PIN_AC27 -to HEX3[1]
-set_location_assignment PIN_AD25 -to HEX3[2]
-set_location_assignment PIN_AC25 -to HEX3[3]
-set_location_assignment PIN_AB28 -to HEX3[4]
-set_location_assignment PIN_AB25 -to HEX3[5]
-set_location_assignment PIN_AB22 -to HEX3[6]
-set_location_assignment PIN_AA24 -to HEX4[0]
-set_location_assignment PIN_Y23 -to HEX4[1]
-set_location_assignment PIN_Y24 -to HEX4[2]
-set_location_assignment PIN_W22 -to HEX4[3]
-set_location_assignment PIN_W24 -to HEX4[4]
-set_location_assignment PIN_V23 -to HEX4[5]
-set_location_assignment PIN_W25 -to HEX4[6]
-set_location_assignment PIN_V25 -to HEX5[0]
-set_location_assignment PIN_AA28 -to HEX5[1]
-set_location_assignment PIN_Y27 -to HEX5[2]
-set_location_assignment PIN_AB27 -to HEX5[3]
-set_location_assignment PIN_AB26 -to HEX5[4]
-set_location_assignment PIN_AA26 -to HEX5[5]
-set_location_assignment PIN_AA25 -to HEX5[6]
+# set_location_assignment PIN_AE26 -to HEX0[0]
+# set_location_assignment PIN_AE27 -to HEX0[1]
+# set_location_assignment PIN_AE28 -to HEX0[2]
+# set_location_assignment PIN_AG27 -to HEX0[3]
+# set_location_assignment PIN_AF28 -to HEX0[4]
+# set_location_assignment PIN_AG28 -to HEX0[5]
+# set_location_assignment PIN_AH28 -to HEX0[6]
+# set_location_assignment PIN_AJ29 -to HEX1[0]
+# set_location_assignment PIN_AH29 -to HEX1[1]
+# set_location_assignment PIN_AH30 -to HEX1[2]
+# set_location_assignment PIN_AG30 -to HEX1[3]
+# set_location_assignment PIN_AF29 -to HEX1[4]
+# set_location_assignment PIN_AF30 -to HEX1[5]
+# set_location_assignment PIN_AD27 -to HEX1[6]
+# set_location_assignment PIN_AB23 -to HEX2[0]
+# set_location_assignment PIN_AE29 -to HEX2[1]
+# set_location_assignment PIN_AD29 -to HEX2[2]
+# set_location_assignment PIN_AC28 -to HEX2[3]
+# set_location_assignment PIN_AD30 -to HEX2[4]
+# set_location_assignment PIN_AC29 -to HEX2[5]
+# set_location_assignment PIN_AC30 -to HEX2[6]
+# set_location_assignment PIN_AD26 -to HEX3[0]
+# set_location_assignment PIN_AC27 -to HEX3[1]
+# set_location_assignment PIN_AD25 -to HEX3[2]
+# set_location_assignment PIN_AC25 -to HEX3[3]
+# set_location_assignment PIN_AB28 -to HEX3[4]
+# set_location_assignment PIN_AB25 -to HEX3[5]
+# set_location_assignment PIN_AB22 -to HEX3[6]
+# set_location_assignment PIN_AA24 -to HEX4[0]
+# set_location_assignment PIN_Y23 -to HEX4[1]
+# set_location_assignment PIN_Y24 -to HEX4[2]
+# set_location_assignment PIN_W22 -to HEX4[3]
+# set_location_assignment PIN_W24 -to HEX4[4]
+# set_location_assignment PIN_V23 -to HEX4[5]
+# set_location_assignment PIN_W25 -to HEX4[6]
+# set_location_assignment PIN_V25 -to HEX5[0]
+# set_location_assignment PIN_AA28 -to HEX5[1]
+# set_location_assignment PIN_Y27 -to HEX5[2]
+# set_location_assignment PIN_AB27 -to HEX5[3]
+# set_location_assignment PIN_AB26 -to HEX5[4]
+# set_location_assignment PIN_AA26 -to HEX5[5]
+# set_location_assignment PIN_AA25 -to HEX5[6]
 set_location_assignment PIN_AA30 -to IRDA_RXD
 set_location_assignment PIN_AB30 -to IRDA_TXD
 set_location_assignment PIN_AA14 -to KEY[0]
-set_location_assignment PIN_AA15 -to KEY[1]
+#set_location_assignment PIN_AA15 -to KEY[1]
 set_location_assignment PIN_W15 -to KEY[2]
 set_location_assignment PIN_Y16 -to KEY[3]
 set_location_assignment PIN_V16 -to LEDR[0]
@@ -295,9 +295,9 @@ set_location_assignment PIN_F10 -to VGA_BLANK_N
 set_location_assignment PIN_A11 -to VGA_CLK
 set_location_assignment PIN_J9 -to VGA_G[0]
 set_location_assignment PIN_J10 -to VGA_G[1]
-set_location_assignment PIN_H12 -to VGA_G[2]
-set_location_assignment PIN_G10 -to VGA_G[3]
-set_location_assignment PIN_G11 -to VGA_G[4]
+#set_location_assignment PIN_H12 -to VGA_G[2]
+#set_location_assignment PIN_G10 -to VGA_G[3]
+#set_location_assignment PIN_G11 -to VGA_G[4]
 set_location_assignment PIN_G12 -to VGA_G[5]
 set_location_assignment PIN_F11 -to VGA_G[6]
 set_location_assignment PIN_E11 -to VGA_G[7]
@@ -315,4 +315,6 @@ set_location_assignment PIN_D11 -to VGA_VS
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
 set_global_assignment -name QSYS_FILE system.qsys
 set_global_assignment -name VHDL_FILE projet_1.vhd
+set_global_assignment -name QIP_FILE pll_50_to_100m/pll_50_to_100m.qip
+set_global_assignment -name SIP_FILE pll_50_to_100m/pll_50_to_100m.sip
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

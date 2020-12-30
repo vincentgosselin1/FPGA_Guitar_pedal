@@ -15,7 +15,7 @@
 #include "system.h"
 
 //for 7-segments
-#include "sseg_driver.h"
+//#include "sseg_driver.h"
 
 //for buttons
 #include "button_reader.h"
@@ -34,7 +34,7 @@ void state_select(void);
 int main(void)
 {
 	//FALLING Edge selected in Qsys.
-	clear_all_edge_capture;
+	//clear_all_edge_capture;
 
 	//Configure audio chip. By default, Line IN is connected to Line OUT by the BYPASS scheme.
 	audio_init();
@@ -44,26 +44,34 @@ int main(void)
 
 		//Guitar Pedal.
 
-		display_int_to_sseg(state); //0 for no-effect
-		state_select();
-		switch (state){
-		case 0 :
-			audio_no_effect();
-			break;
+		//display_int_to_sseg(state); //0 for no-effect
+		//state_select();
+		//switch (state){
+		//case 0 :
 
-		case 1 :
-			audio_distortion();
-			break;
+		/*int i,j = 0;
+			for (i = 0; i < 1; i++) {
+				//printf("i = %d\n\r", i);
+				j++;
+			}*/
 
-		case 2 :
+			//audio_no_effect();
+			//printf("whutsup \n");
+			//break;
+
+//		case 1 :
+//			audio_distortion();
+//			break;
+//
+//		case 2 :
 			audio_delay();
-			break;
+//			break;
+//
+//		case 3 :
+//			audio_octave();
+//			break;
 
-		case 3 :
-			audio_octave();
-			break;
-
-		}
+		//}
 	}
 	return 0;
 }

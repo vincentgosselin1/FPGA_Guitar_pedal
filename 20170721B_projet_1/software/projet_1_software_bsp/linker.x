@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_gen2_0' in SOPC Builder design 'system'
  * SOPC Builder design path: ../../system.sopcinfo
  *
- * Generated: Thu Jul 20 21:25:56 EDT 2017
+ * Generated: Tue Dec 29 19:32:09 EST 2020
  */
 
 /*
@@ -51,7 +51,7 @@
 MEMORY
 {
     reset : ORIGIN = 0x80000, LENGTH = 32
-    onchip_memory2_0 : ORIGIN = 0x80020, LENGTH = 299968
+    onchip_memory2_0 : ORIGIN = 0x80020, LENGTH = 441968
 }
 
 /* Define symbols for each memory base-address */
@@ -367,7 +367,7 @@ SECTIONS
 /*
  * Don't override this, override the __alt_stack_* symbols instead.
  */
-__alt_data_end = 0xc93e0;
+__alt_data_end = 0xebe90;
 
 /*
  * The next two symbols define the location of the default stack.  You can
@@ -383,4 +383,4 @@ PROVIDE( __alt_stack_limit   = __alt_stack_base );
  * Override this symbol to put the heap in a different memory.
  */
 PROVIDE( __alt_heap_start    = end );
-PROVIDE( __alt_heap_limit    = 0xc93e0 );
+PROVIDE( __alt_heap_limit    = 0xebe90 );

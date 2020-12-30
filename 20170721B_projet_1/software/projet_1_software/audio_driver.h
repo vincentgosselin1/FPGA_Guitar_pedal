@@ -37,11 +37,22 @@ unsigned int r_buf[AUDIO_BUFFER_LEN];
 //For 500ms Echo.
 //Sample rate is 32kHz, 31.25usec between each samples
 //Echo will be at 500ms. So we need to store 16000samples.
-#define DELAY_AUDIO_BUFFER_LEN 16000
+//#define DELAY_AUDIO_BUFFER_LEN 16000
+//unsigned int delay_audio_buffer[DELAY_AUDIO_BUFFER_LEN] = {0};
+
+//For 1000ms Echo.
+//Sample rate is 32kHz, 31.25usec between each samples
+//Echo will be at 2000ms. So we need to store 64000samples.
+
+//92500 seems good with 500ms of delay on pc.
+#define DELAY_AUDIO_BUFFER_LEN 92500
+//#define DELAY_AUDIO_BUFFER_LEN 40000
 unsigned int delay_audio_buffer[DELAY_AUDIO_BUFFER_LEN] = {0};
+
 //int delay_audio_buffer_index = 0;
 unsigned int storing_audio_index = 0;
 unsigned int reading_audio_index = 1;
+//unsigned int reading_audio_index = 1;
 unsigned int outgoing_buffer[AUDIO_BUFFER_LEN];
 
 //For Octave, Higher pitch use here.
@@ -63,27 +74,34 @@ void audio_init(void){
 	//open the Audio codec device
 	audio_dev = alt_up_audio_open_dev (AUDIO_CODEC_NAME);
 	if ( audio_dev == NULL){
-	printf("Error: could not open audio codec device \n");
+	//printf("Error: could not open audio codec device \n");
 	} else {
-	printf("Opened audio codec device \n");
+	//printf("Opened audio codec device \n");
 	}
 
 	// open the Audio config device
 	av_config_dev = alt_up_av_config_open_dev(AUDIO_CONFIG_NAME);
 	if ( av_config_dev == NULL){
-	printf("Error: could not open audio config device \n\r");
+	//printf("Error: could not open audio config device \n\r");
 	} else {
-	printf("Opened audio config device \n\r");
+	//printf("Opened audio config device \n\r");
 	}
 
 	//Reset Audio Codec chip (WM8731) to empty Fifos + hardware init config.
 	alt_up_audio_reset_audio_core(audio_dev);
 	alt_up_av_config_reset(av_config_dev);
 
+	//int i,j = 0;
+	//for (i = 0; i < 100; i++) {
+		//printf("i = %d\n\r", i);
+	//}
+
 	//Audio Chip ready for I2C transfer?
 	av_config_dev = alt_up_av_config_open_dev(AUDIO_CONFIG_NAME);
 	if(alt_up_av_config_read_ready(av_config_dev)){
-		printf("Audio chip ready for new I2c transfer \n\r");
+		//printf("Audio chip ready for new I2c transfer \n\r");
+	} else {
+		//printf("Audio chip NOT ready for new I2c transfer \n\r");
 	}
 
 	//Writing a new config for the Audio chip.
@@ -120,6 +138,9 @@ void audio_init(void){
 	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x6, 0x02);
 
 	//The rest of control registers are initialized by Hardware.
+
+	//Select DAC, Disable Bypass to be output to RHPout/LHPout.
+	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x04, 0x12);
 }
 
 //No effect, this simply reads value from ADC and outputs them to DAC.
@@ -127,7 +148,7 @@ void audio_init(void){
 void audio_no_effect(void){
 
 	//Select DAC, Disable Bypass to be output to RHPout/LHPout.
-	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x04, 0x12);
+	//alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x04, 0x12);
 
 	//EVEN BETTER, best one.
 
@@ -192,9 +213,9 @@ void audio_delay(void){
 	//echo will be at 500ms. So we need to store 16000samples.
 
 	//Active bypass + dac in audio path
-	alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x04, 0x1A);
+	//alt_up_av_config_write_audio_cfg_register(av_config_dev, 0x04, 0x1A);
 
-	//Aquiring/Writing to Audio Chip
+	//Acquiring/Writing to Audio Chip
 	int input_fifo = alt_up_audio_read_fifo_avail(audio_dev, ALT_UP_AUDIO_LEFT);
 	//For synchronizing writing/reading from audio chip.
 	if(input_fifo>AUDIO_BUFFER_LEN){
@@ -204,6 +225,22 @@ void audio_delay(void){
 		storing_audio_index = storing_audio_index % (DELAY_AUDIO_BUFFER_LEN);
 		//reading index
 		reading_audio_index = reading_audio_index % (DELAY_AUDIO_BUFFER_LEN-64);//SOLVE THE TOCTOC
+		//reading_audio_index = reading_audio_index % (DELAY_AUDIO_BUFFER_LEN+64);//SOLVE THE TOCTOC
+			//reading_audio_index = reading_audio_index % (DELAY_AUDIO_BUFFER_LEN);//SOLVE THE TOCTOC
+
+
+//
+//		//circular buffer fixed.
+		//if(storing_audio_index >= DELAY_AUDIO_BUFFER_LEN){
+		//	storing_audio_index = 0;
+		//}
+		//if(reading_audio_index >= DELAY_AUDIO_BUFFER_LEN) {
+		//	reading_audio_index = 1;
+		//}
+
+
+		//storing_audio_index = storing_audio_index % (DELAY_AUDIO_BUFFER_LEN);
+		//reading_audio_index = reading_audio_index % (DELAY_AUDIO_BUFFER_LEN);//SOLVE THE TOCTOC
 
 		//Reading input fifo.
 		alt_up_audio_read_fifo (audio_dev, r_buf, AUDIO_BUFFER_LEN, ALT_UP_AUDIO_RIGHT);
@@ -223,7 +260,7 @@ void audio_delay(void){
 
 			//storing in delay_buffer
 			delay_audio_buffer[storing_audio_index] = l_buf[i];
-			//retriving from buffer
+			//retrieving from buffer
 			outgoing_buffer[i] = delay_audio_buffer[reading_audio_index];
 
 			//Reading index is always 1 sample ahead of storing index.

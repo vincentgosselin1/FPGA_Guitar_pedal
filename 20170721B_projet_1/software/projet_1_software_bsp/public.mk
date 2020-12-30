@@ -77,12 +77,12 @@ ALT_CPPFLAGS += -pipe
 
 # This following VERSION comment indicates the version of the tool used to 
 # generate this makefile. A makefile variable is provided for VERSION as well. 
-# ACDS_VERSION: 15.1
-ACDS_VERSION := 15.1
+# ACDS_VERSION: 17.1
+ACDS_VERSION := 17.1
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 185
+# BUILD_NUMBER: 590
 
 # Qsys--generated SOPCINFO file. Required for resolving node instance ID's with 
 # design component names. 
@@ -152,21 +152,14 @@ SOPC_SYSID_FLAG += --id=1
 ELF_PATCH_FLAG  += --id 1
 
 # The SOPC System ID Base Address 
-# setting SOPC_SYSID_BASE_ADDRESS is 0x101050
-SOPC_SYSID_FLAG += --sidp=0x101050
-ELF_PATCH_FLAG  += --sidp 0x101050
+# setting SOPC_SYSID_BASE_ADDRESS is 0x101020
+SOPC_SYSID_FLAG += --sidp=0x101020
+ELF_PATCH_FLAG  += --sidp 0x101020
 
 # The SOPC Timestamp 
-# setting SOPC_TIMESTAMP is 1500673608
-SOPC_SYSID_FLAG += --timestamp=1500673608
-ELF_PATCH_FLAG  += --timestamp 1500673608
-
-# Enable JTAG UART driver to recover when host is inactive causing buffer to 
-# full without returning error. Printf will not fail with this recovery. none 
-# setting altera_avalon_jtag_uart_driver.enable_jtag_uart_ignore_fifo_full_error is false
-
-# Small-footprint (polled mode) driver none 
-# setting altera_avalon_jtag_uart_driver.enable_small_driver is false
+# setting SOPC_TIMESTAMP is 1609287820
+SOPC_SYSID_FLAG += --timestamp=1609287820
+ELF_PATCH_FLAG  += --timestamp 1609287820
 
 # Build a custom version of newlib with the specified space-separated compiler 
 # flags. The custom newlib build will be placed in the <bsp root>/newlib 
@@ -256,6 +249,18 @@ ALT_CPPFLAGS += -DALT_NO_INSTRUCTION_EMULATION
 # SOPC_SYSID_FLAG in public.mk. none 
 # setting hal.enable_sopc_sysid_check is true
 
+# C/C++ compiler to generate (do not generate) GP-relative accesses. 'none' 
+# tells the compilter not to generate GP-relative accesses. 'local' will 
+# generate GP-relative accesses for small data objects that are not external, 
+# weak, or uninitialized common symbols. Also use GP-relative addressing for 
+# objects that have been explicitly placed in a small data section via a 
+# section attribute. provides the default set of debug symbols typically 
+# required to debug a typical application. 'global' is same as 'local' but also 
+# generate GP-relative accesses for small data objects that are external, weak, 
+# or common. none 
+# setting hal.make.cflags_mgpopt is -mgpopt=global
+ALT_CFLAGS += -mgpopt=global
+
 # Enable BSP generation to query if SOPC system is big endian. If true ignores 
 # export of 'ALT_CFLAGS += -meb' to public.mk if big endian system. none 
 # setting hal.make.ignore_system_derived.big_endian is false
@@ -332,18 +337,18 @@ ALT_CPPFLAGS += -DALT_NO_INSTRUCTION_EMULATION
 
 # Slave descriptor of STDERR character-mode device. This setting is used by the 
 # ALT_STDERR family of defines in system.h. none 
-# setting hal.stderr is jtag_uart_0
-ELF_PATCH_FLAG  += --stderr_dev jtag_uart_0
+# setting hal.stderr is none
+ELF_PATCH_FLAG  += --stderr_dev none
 
 # Slave descriptor of STDIN character-mode device. This setting is used by the 
 # ALT_STDIN family of defines in system.h. none 
-# setting hal.stdin is jtag_uart_0
-ELF_PATCH_FLAG  += --stdin_dev jtag_uart_0
+# setting hal.stdin is none
+ELF_PATCH_FLAG  += --stdin_dev none
 
 # Slave descriptor of STDOUT character-mode device. This setting is used by the 
 # ALT_STDOUT family of defines in system.h. none 
-# setting hal.stdout is jtag_uart_0
-ELF_PATCH_FLAG  += --stdout_dev jtag_uart_0
+# setting hal.stdout is none
+ELF_PATCH_FLAG  += --stdout_dev none
 
 
 #------------------------------------------------------------------------------

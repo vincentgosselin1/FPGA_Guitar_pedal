@@ -22,13 +22,13 @@
 <td width="20%" bgcolor="#77BBFF">BSP Version:</td><td>default</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated On:</td><td>2017-07-21 17:53:06</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated On:</td><td>Dec 29, 2020 7:32:08 PM</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated Timestamp:</td><td>1500673986374</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated Timestamp:</td><td>1609288328958</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated Location:</td><td>C:\Users\ak82770\Documents\ele748\projet_1\software\projet_1_software_bsp</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated Location:</td><td>C:\intelFPGA_lite\17.1\quartus\MyDev\FPGA_Guitar_pedal\20170721B_projet_1\software\projet_1_software_bsp</td>
 </tr>
 </table>
 <br>
@@ -38,28 +38,16 @@
 <th align="left" width="20%">Slave Descriptor</th><th align="left" width="40%">Address Range</th><th align="left" width="20%">Size</th><th align="left" width="20%">Attributes</th>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>jtag_uart_0</td><td>0x00101058 - 0x0010105F</td><td>8</td><td class="listing">printable</td>
+<td>sysid_qsys_0</td><td>0x00101020 - 0x00101027</td><td>8</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>sysid_qsys_0</td><td>0x00101050 - 0x00101057</td><td>8</td><td class="listing">&nbsp;</td>
+<td>audio_codec</td><td>0x00101010 - 0x0010101F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>audio_codec</td><td>0x00101040 - 0x0010104F</td><td>16</td><td class="listing">&nbsp;</td>
+<td>audio_config</td><td>0x00101000 - 0x0010100F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>audio_config</td><td>0x00101030 - 0x0010103F</td><td>16</td><td class="listing">&nbsp;</td>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>buttons</td><td>0x00101020 - 0x0010102F</td><td>16</td><td class="listing">&nbsp;</td>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>sseg_i_iv</td><td>0x00101010 - 0x0010101F</td><td>16</td><td class="listing">&nbsp;</td>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>sseg_v_vi</td><td>0x00101000 - 0x0010100F</td><td>16</td><td class="listing">&nbsp;</td>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>onchip_memory2_0</td><td>0x00080000 - 0x000C93DF</td><td>300000</td><td class="listing">memory</td>
+<td>onchip_memory2_0</td><td>0x00080000 - 0x000EBE8F</td><td>442000</td><td class="listing">memory</td>
 </tr>
 </table>
 <br>
@@ -97,60 +85,6 @@
 </tr>
 </table>
 <h3>Settings</h3>
-<table border="1" bgcolor="#FFFFCC" width="60%">
-<tr bgcolor="#77BBFF">
-<td align="left" width="15%">Setting Name:</td><td align="left">altera_avalon_jtag_uart_driver.enable_jtag_uart_ignore_fifo_full_error</td>
-</tr>
-<tr>
-<td width="20%">Identifier:</td><td>ALTERA_AVALON_JTAG_UART_IGNORE_FIFO_FULL_ERROR</td>
-</tr>
-<tr>
-<td width="20%">Default Value:</td><td>false</td>
-</tr>
-<tr>
-<td width="20%">Value:</td><td>false</td>
-</tr>
-<tr>
-<td width="20%">Type:</td><td>BooleanDefineOnly</td>
-</tr>
-<tr mode="wrap">
-<td width="20%">Destination:</td><td>public_mk_define</td>
-</tr>
-<tr mode="wrap">
-<td width="20%">Description:</td><td>Enable JTAG UART driver to recover when host is inactive causing buffer to full without returning error. Printf will not fail with this recovery.</td>
-</tr>
-<tr mode="wrap">
-<td width="20%">Restrictions:</td><td>none</td>
-</tr>
-</table>
-<br>
-<table border="1" bgcolor="#FFFFCC" width="60%">
-<tr bgcolor="#77BBFF">
-<td align="left" width="15%">Setting Name:</td><td align="left">altera_avalon_jtag_uart_driver.enable_small_driver</td>
-</tr>
-<tr>
-<td width="20%">Identifier:</td><td>ALTERA_AVALON_JTAG_UART_SMALL</td>
-</tr>
-<tr>
-<td width="20%">Default Value:</td><td>false</td>
-</tr>
-<tr>
-<td width="20%">Value:</td><td>false</td>
-</tr>
-<tr>
-<td width="20%">Type:</td><td>BooleanDefineOnly</td>
-</tr>
-<tr mode="wrap">
-<td width="20%">Destination:</td><td>public_mk_define</td>
-</tr>
-<tr mode="wrap">
-<td width="20%">Description:</td><td>Small-footprint (polled mode) driver</td>
-</tr>
-<tr mode="wrap">
-<td width="20%">Restrictions:</td><td>none</td>
-</tr>
-</table>
-<br>
 <table border="1" bgcolor="#FFFFCC" width="60%">
 <tr bgcolor="#77BBFF">
 <td align="left" width="15%">Setting Name:</td><td align="left">hal.custom_newlib_flags</td>
@@ -549,7 +483,7 @@
 <td width="20%">Destination:</td><td>none</td>
 </tr>
 <tr mode="wrap">
-<td width="20%">Description:</td><td>Enables the alt_load() facility. The alt_load() facility copies sections from the .text memory into RAM. If true, this setting sets up the VMA/LMA of sections in linker.x to allow them to be loaded into the .text memory.</td>
+<td width="20%">Description:</td><td>Enables the alt_load() facility. The alt_load() facility copies data sections (.rodata, .rwdata, or .exceptions) from boot memory to RAM. If true, this setting sets up the VMA/LMA of sections in linker.x to allow them to be loaded into the .text memory.</td>
 </tr>
 <tr mode="wrap">
 <td width="20%">Restrictions:</td><td>This setting is typically false if an external bootloader (e.g. flash bootloader) is present.</td>
@@ -1422,6 +1356,33 @@
 <br>
 <table border="1" bgcolor="#FFFFCC" width="60%">
 <tr bgcolor="#77BBFF">
+<td align="left" width="15%">Setting Name:</td><td align="left">hal.make.cflags_mgpopt</td>
+</tr>
+<tr>
+<td width="20%">Identifier:</td><td>CFLAGS_MGPOPT</td>
+</tr>
+<tr>
+<td width="20%">Default Value:</td><td>-mgpopt=global</td>
+</tr>
+<tr>
+<td width="20%">Value:</td><td>-mgpopt=global</td>
+</tr>
+<tr>
+<td width="20%">Type:</td><td>UnquotedString</td>
+</tr>
+<tr mode="wrap">
+<td width="20%">Destination:</td><td>public_mk_define</td>
+</tr>
+<tr mode="wrap">
+<td width="20%">Description:</td><td>C/C++ compiler to generate (do not generate) GP-relative accesses. 'none' tells the compilter not to generate GP-relative accesses. 'local' will generate GP-relative accesses for small data objects that are not external, weak, or uninitialized common symbols. Also use GP-relative addressing for objects that have been explicitly placed in a small data section via a section attribute. provides the default set of debug symbols typically required to debug a typical application. 'global' is same as 'local' but also generate GP-relative accesses for small data objects that are external, weak, or common.</td>
+</tr>
+<tr mode="wrap">
+<td width="20%">Restrictions:</td><td>none</td>
+</tr>
+</table>
+<br>
+<table border="1" bgcolor="#FFFFCC" width="60%">
+<tr bgcolor="#77BBFF">
 <td align="left" width="15%">Setting Name:</td><td align="left">hal.make.cxx</td>
 </tr>
 <tr>
@@ -1944,7 +1905,7 @@
 <td width="20%">Default Value:</td><td>none</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>jtag_uart_0</td>
+<td width="20%">Value:</td><td>none</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>UnquotedString</td>
@@ -1971,7 +1932,7 @@
 <td width="20%">Default Value:</td><td>none</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>jtag_uart_0</td>
+<td width="20%">Value:</td><td>none</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>UnquotedString</td>
@@ -1998,7 +1959,7 @@
 <td width="20%">Default Value:</td><td>none</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>jtag_uart_0</td>
+<td width="20%">Value:</td><td>none</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>UnquotedString</td>

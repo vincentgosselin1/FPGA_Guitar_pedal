@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_gen2_0' in SOPC Builder design 'system'
  * SOPC Builder design path: ../../system.sopcinfo
  *
- * Generated: Fri Jul 21 17:53:06 EDT 2017
+ * Generated: Tue Dec 29 19:32:09 EST 2020
  */
 
 /*
@@ -133,9 +133,7 @@
  *
  */
 
-#define __ALTERA_AVALON_JTAG_UART
 #define __ALTERA_AVALON_ONCHIP_MEMORY2
-#define __ALTERA_AVALON_PIO
 #define __ALTERA_AVALON_SYSID_QSYS
 #define __ALTERA_NIOS2_GEN2
 #define __ALTERA_UP_AVALON_AUDIO
@@ -157,24 +155,18 @@
 #define ALT_NUM_EXTERNAL_INTERRUPT_CONTROLLERS 0
 #define ALT_NUM_INTERNAL_INTERRUPT_CONTROLLERS 1
 #define ALT_NUM_INTERRUPT_CONTROLLERS 1
-#define ALT_STDERR "/dev/jtag_uart_0"
-#define ALT_STDERR_BASE 0x101058
-#define ALT_STDERR_DEV jtag_uart_0
-#define ALT_STDERR_IS_JTAG_UART
-#define ALT_STDERR_PRESENT
-#define ALT_STDERR_TYPE "altera_avalon_jtag_uart"
-#define ALT_STDIN "/dev/jtag_uart_0"
-#define ALT_STDIN_BASE 0x101058
-#define ALT_STDIN_DEV jtag_uart_0
-#define ALT_STDIN_IS_JTAG_UART
-#define ALT_STDIN_PRESENT
-#define ALT_STDIN_TYPE "altera_avalon_jtag_uart"
-#define ALT_STDOUT "/dev/jtag_uart_0"
-#define ALT_STDOUT_BASE 0x101058
-#define ALT_STDOUT_DEV jtag_uart_0
-#define ALT_STDOUT_IS_JTAG_UART
-#define ALT_STDOUT_PRESENT
-#define ALT_STDOUT_TYPE "altera_avalon_jtag_uart"
+#define ALT_STDERR "/dev/null"
+#define ALT_STDERR_BASE 0x0
+#define ALT_STDERR_DEV null
+#define ALT_STDERR_TYPE ""
+#define ALT_STDIN "/dev/null"
+#define ALT_STDIN_BASE 0x0
+#define ALT_STDIN_DEV null
+#define ALT_STDIN_TYPE ""
+#define ALT_STDOUT "/dev/null"
+#define ALT_STDOUT_BASE 0x0
+#define ALT_STDOUT_DEV null
+#define ALT_STDOUT_TYPE ""
 #define ALT_SYSTEM_NAME "system"
 
 
@@ -184,7 +176,7 @@
  */
 
 #define ALT_MODULE_CLASS_audio_codec altera_up_avalon_audio
-#define AUDIO_CODEC_BASE 0x101040
+#define AUDIO_CODEC_BASE 0x101010
 #define AUDIO_CODEC_IRQ 0
 #define AUDIO_CODEC_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define AUDIO_CODEC_NAME "/dev/audio_codec"
@@ -198,39 +190,12 @@
  */
 
 #define ALT_MODULE_CLASS_audio_config altera_up_avalon_audio_and_video_config
-#define AUDIO_CONFIG_BASE 0x101030
+#define AUDIO_CONFIG_BASE 0x101000
 #define AUDIO_CONFIG_IRQ -1
 #define AUDIO_CONFIG_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define AUDIO_CONFIG_NAME "/dev/audio_config"
 #define AUDIO_CONFIG_SPAN 16
 #define AUDIO_CONFIG_TYPE "altera_up_avalon_audio_and_video_config"
-
-
-/*
- * buttons configuration
- *
- */
-
-#define ALT_MODULE_CLASS_buttons altera_avalon_pio
-#define BUTTONS_BASE 0x101020
-#define BUTTONS_BIT_CLEARING_EDGE_REGISTER 1
-#define BUTTONS_BIT_MODIFYING_OUTPUT_REGISTER 0
-#define BUTTONS_CAPTURE 1
-#define BUTTONS_DATA_WIDTH 4
-#define BUTTONS_DO_TEST_BENCH_WIRING 0
-#define BUTTONS_DRIVEN_SIM_VALUE 0
-#define BUTTONS_EDGE_TYPE "FALLING"
-#define BUTTONS_FREQ 100000000
-#define BUTTONS_HAS_IN 1
-#define BUTTONS_HAS_OUT 0
-#define BUTTONS_HAS_TRI 0
-#define BUTTONS_IRQ -1
-#define BUTTONS_IRQ_INTERRUPT_CONTROLLER_ID -1
-#define BUTTONS_IRQ_TYPE "NONE"
-#define BUTTONS_NAME "/dev/buttons"
-#define BUTTONS_RESET_VALUE 0
-#define BUTTONS_SPAN 16
-#define BUTTONS_TYPE "altera_avalon_pio"
 
 
 /*
@@ -242,24 +207,6 @@
 #define ALT_MAX_FD 32
 #define ALT_SYS_CLK none
 #define ALT_TIMESTAMP_CLK none
-
-
-/*
- * jtag_uart_0 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_jtag_uart_0 altera_avalon_jtag_uart
-#define JTAG_UART_0_BASE 0x101058
-#define JTAG_UART_0_IRQ 1
-#define JTAG_UART_0_IRQ_INTERRUPT_CONTROLLER_ID 0
-#define JTAG_UART_0_NAME "/dev/jtag_uart_0"
-#define JTAG_UART_0_READ_DEPTH 64
-#define JTAG_UART_0_READ_THRESHOLD 8
-#define JTAG_UART_0_SPAN 8
-#define JTAG_UART_0_TYPE "altera_avalon_jtag_uart"
-#define JTAG_UART_0_WRITE_DEPTH 64
-#define JTAG_UART_0_WRITE_THRESHOLD 8
 
 
 /*
@@ -285,64 +232,10 @@
 #define ONCHIP_MEMORY2_0_READ_DURING_WRITE_MODE "DONT_CARE"
 #define ONCHIP_MEMORY2_0_SINGLE_CLOCK_OP 0
 #define ONCHIP_MEMORY2_0_SIZE_MULTIPLE 1
-#define ONCHIP_MEMORY2_0_SIZE_VALUE 300000
-#define ONCHIP_MEMORY2_0_SPAN 300000
+#define ONCHIP_MEMORY2_0_SIZE_VALUE 442000
+#define ONCHIP_MEMORY2_0_SPAN 442000
 #define ONCHIP_MEMORY2_0_TYPE "altera_avalon_onchip_memory2"
 #define ONCHIP_MEMORY2_0_WRITABLE 1
-
-
-/*
- * sseg_i_iv configuration
- *
- */
-
-#define ALT_MODULE_CLASS_sseg_i_iv altera_avalon_pio
-#define SSEG_I_IV_BASE 0x101010
-#define SSEG_I_IV_BIT_CLEARING_EDGE_REGISTER 0
-#define SSEG_I_IV_BIT_MODIFYING_OUTPUT_REGISTER 0
-#define SSEG_I_IV_CAPTURE 0
-#define SSEG_I_IV_DATA_WIDTH 32
-#define SSEG_I_IV_DO_TEST_BENCH_WIRING 0
-#define SSEG_I_IV_DRIVEN_SIM_VALUE 0
-#define SSEG_I_IV_EDGE_TYPE "NONE"
-#define SSEG_I_IV_FREQ 100000000
-#define SSEG_I_IV_HAS_IN 0
-#define SSEG_I_IV_HAS_OUT 1
-#define SSEG_I_IV_HAS_TRI 0
-#define SSEG_I_IV_IRQ -1
-#define SSEG_I_IV_IRQ_INTERRUPT_CONTROLLER_ID -1
-#define SSEG_I_IV_IRQ_TYPE "NONE"
-#define SSEG_I_IV_NAME "/dev/sseg_i_iv"
-#define SSEG_I_IV_RESET_VALUE 0
-#define SSEG_I_IV_SPAN 16
-#define SSEG_I_IV_TYPE "altera_avalon_pio"
-
-
-/*
- * sseg_v_vi configuration
- *
- */
-
-#define ALT_MODULE_CLASS_sseg_v_vi altera_avalon_pio
-#define SSEG_V_VI_BASE 0x101000
-#define SSEG_V_VI_BIT_CLEARING_EDGE_REGISTER 0
-#define SSEG_V_VI_BIT_MODIFYING_OUTPUT_REGISTER 0
-#define SSEG_V_VI_CAPTURE 0
-#define SSEG_V_VI_DATA_WIDTH 32
-#define SSEG_V_VI_DO_TEST_BENCH_WIRING 0
-#define SSEG_V_VI_DRIVEN_SIM_VALUE 0
-#define SSEG_V_VI_EDGE_TYPE "NONE"
-#define SSEG_V_VI_FREQ 100000000
-#define SSEG_V_VI_HAS_IN 0
-#define SSEG_V_VI_HAS_OUT 1
-#define SSEG_V_VI_HAS_TRI 0
-#define SSEG_V_VI_IRQ -1
-#define SSEG_V_VI_IRQ_INTERRUPT_CONTROLLER_ID -1
-#define SSEG_V_VI_IRQ_TYPE "NONE"
-#define SSEG_V_VI_NAME "/dev/sseg_v_vi"
-#define SSEG_V_VI_RESET_VALUE 0
-#define SSEG_V_VI_SPAN 16
-#define SSEG_V_VI_TYPE "altera_avalon_pio"
 
 
 /*
@@ -351,13 +244,13 @@
  */
 
 #define ALT_MODULE_CLASS_sysid_qsys_0 altera_avalon_sysid_qsys
-#define SYSID_QSYS_0_BASE 0x101050
+#define SYSID_QSYS_0_BASE 0x101020
 #define SYSID_QSYS_0_ID 1
 #define SYSID_QSYS_0_IRQ -1
 #define SYSID_QSYS_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_QSYS_0_NAME "/dev/sysid_qsys_0"
 #define SYSID_QSYS_0_SPAN 8
-#define SYSID_QSYS_0_TIMESTAMP 1500673608
+#define SYSID_QSYS_0_TIMESTAMP 1609287820
 #define SYSID_QSYS_0_TYPE "altera_avalon_sysid_qsys"
 
 #endif /* __SYSTEM_H_ */

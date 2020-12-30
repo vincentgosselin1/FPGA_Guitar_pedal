@@ -1,4 +1,4 @@
-//Legal Notice: (C)2017 Altera Corporation. All rights reserved.  Your
+//Legal Notice: (C)2020 Altera Corporation. All rights reserved.  Your
 //use of Altera Corporation's design tools, logic functions and other
 //software and tools, and its AMPP partner logic functions, and any
 //output files any of the foregoing (including device programming or
@@ -25,6 +25,7 @@ module system_onchip_memory2_0 (
                                   chipselect,
                                   clk,
                                   clken,
+                                  freeze,
                                   reset,
                                   reset_req,
                                   write,
@@ -44,14 +45,16 @@ module system_onchip_memory2_0 (
   input            chipselect;
   input            clk;
   input            clken;
+  input            freeze;
   input            reset;
   input            reset_req;
   input            write;
   input   [ 31: 0] writedata;
 
-  wire             clocken0;
-  wire    [ 31: 0] readdata;
-  wire             wren;
+
+wire             clocken0;
+wire    [ 31: 0] readdata;
+wire             wren;
   assign wren = chipselect & write;
   assign clocken0 = clken & ~reset_req;
   altsyncram the_altsyncram
@@ -68,12 +71,13 @@ module system_onchip_memory2_0 (
   defparam the_altsyncram.byte_size = 8,
            the_altsyncram.init_file = INIT_FILE,
            the_altsyncram.lpm_type = "altsyncram",
-           the_altsyncram.maximum_depth = 75000,
-           the_altsyncram.numwords_a = 75000,
+           the_altsyncram.maximum_depth = 110500,
+           the_altsyncram.numwords_a = 110500,
            the_altsyncram.operation_mode = "SINGLE_PORT",
            the_altsyncram.outdata_reg_a = "UNREGISTERED",
            the_altsyncram.ram_block_type = "AUTO",
            the_altsyncram.read_during_write_mode_mixed_ports = "DONT_CARE",
+           the_altsyncram.read_during_write_mode_port_a = "DONT_CARE",
            the_altsyncram.width_a = 32,
            the_altsyncram.width_byteena_a = 4,
            the_altsyncram.widthad_a = 17;
